@@ -5,7 +5,7 @@ import api from "../../service/api";
 
 const ListAut = () => {
     const [pesquisa, setPesquisa] = React.useState('');
-    const [filmes, setFilmes] = React.useState([]);
+    const [filmes, setFilmes] = React.useState<any[]>([]);
 
     useEffect(() =>{
         async function getAPI(){
@@ -19,10 +19,10 @@ const ListAut = () => {
 
     async function searchAutor(){
         const response = await api.get('');
-        setFilmes(response.data.hits.filter(b=> b.author.toLowerCase().includes(pesquisa.toLowerCase())))
+        setFilmes(response.data.hits.filter((b : any )=> b.author.toLowerCase().includes(pesquisa.toLowerCase())))
     }
 
-    const verCampo = (campo) => {
+    const verCampo = (campo : string) => {
         if(campo === null) {
             return "Não encontrado";
         } else {
