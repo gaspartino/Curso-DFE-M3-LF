@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Header = (prop : {tittle : string}) => {
     return (
         <div className= "header">
