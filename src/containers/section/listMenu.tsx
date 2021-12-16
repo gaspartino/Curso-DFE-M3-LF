@@ -19,7 +19,14 @@ const ListAut = () => {
 
     async function searchAutor(){
         const response = await api.get('');
-        setFilmes(response.data.hits.filter((b : any )=> b.author.toLowerCase().includes(pesquisa.toLowerCase())))
+        console.log(response.data.hits[5].title.toLowerCase());
+        setFilmes(response.data.hits.filter((b : any )=> {
+            if(b.title === null) {
+                return b.author.toLowerCase().includes(pesquisa.toLowerCase());
+            }else {
+                return (b.author.toLowerCase().includes(pesquisa.toLowerCase()) || b.title.toLowerCase().includes(pesquisa.toLowerCase()))
+            }
+        }));    
     }
 
     const verCampo = (campo : string) => {
