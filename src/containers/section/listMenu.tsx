@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Perfil from "../../components/perfil";
 import ico from "../../images/search.png";
@@ -13,7 +13,7 @@ const ListAut = () => {
     useEffect(() =>{
         async function getAPI(){
             const response = await api.get('');
-    
+            console.log(response.data.hits[7].title);
             setData(response.data.hits);
         }
         getAPI()
@@ -21,7 +21,6 @@ const ListAut = () => {
 
     async function searchAutor(){
         const response = await api.get('');
-        console.log(response.data.hits[5].title.toLowerCase());
         setData(response.data.hits.filter((b : any )=> {
             if(b.title === null) {
                 return b.author.toLowerCase().includes(pesquisa.toLowerCase());
@@ -40,13 +39,12 @@ const ListAut = () => {
     }
     
     const setSearch = (search:string) => {
-        console.log(search);
         dispatch({type: "SEARCH_CHANGE", payload: search})
-        console.log(search);
     }
 
     const setData = (data:any[]) => {
         dispatch({type: "DATA_CHANGE", payload: data})
+        console.log(data.length);
     }
 
     return (
